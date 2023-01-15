@@ -5,6 +5,10 @@ from keras import layers
 
 from config import conf
 
+# ------------------------------------------------------------------------
+#     model  -  untrained model object
+# ------------------------------------------------------------------------
+
 model = keras.Sequential(
     [
         keras.Input(shape=conf["inputShape"]),

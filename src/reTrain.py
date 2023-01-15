@@ -7,8 +7,18 @@ from preProcess import preProcess
 from model import model
 from extract import extract_test, extract_train
 
+# ------------------------------------------------------------------------
+#     reTrain  -  retrain the model
+# ------------------------------------------------------------------------
 
-def reTrain(save=False, kerasData=False):
+def reTrain(save=False, kerasData=False) -> None:
+    """retrain the model.
+
+    :param save: whether to save the model after training, defaults to False
+    :type save: bool, optional
+    :param kerasData: whether to use the keras built in data, defaults to False
+    :type kerasData: bool, optional
+    """    
     if kerasData:
         (X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()
         X_train, y_train = preProcess(X_train, y_train)

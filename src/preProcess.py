@@ -5,8 +5,21 @@ from tensorflow import keras
 
 from config import conf
 
-def preProcess(X, y):
+# ------------------------------------------------------------------------
+#     preProcess  -  input preProcessing function
+# ------------------------------------------------------------------------
 
+def preProcess(X: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """preprocess image datasets
+
+    :param X: X dataset
+    :type X: np.ndarray
+    :param y: y dataset
+    :type y: np.ndarray
+    :return: tuple of preprocessed X and y datasets
+    :rtype: tuple[np.ndarray, np.ndarray]
+    """    
+    
     # Scale images to the [0, 1] range
     X = X.astype("float32") / 255
     
