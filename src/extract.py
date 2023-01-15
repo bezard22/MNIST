@@ -1,24 +1,22 @@
 # src/extract.py
 
 import numpy as np
-from PIL import Image as im
-from os import mkdir
-from os.path import join
-from tqdm import tqdm
+import pandas as pd
 
+from config import conf
 
-def extract(srcPath, dstPath):
-    ar = np.genfromtxt(srcPath, delimiter=',', dtype=np.uint8)
-    mkdir(dstPath)
-    for i in range(10):
-        mkdir(join(dstPath, str(i)))
+def extract_test():
+    test = pd.read_csv(conf["testPath"], engine="c", header=None).to_numpy()
+    X_test = test[:, 1:]
+    y_test = test[:, 1]
+    X_test = np.reshape(X_test, (-1, 28, 28))
+    return (X_test, y_test)
 
-    for i in tqdm(range(len(ar))):
-        img = im.fromarray(np.reshape(ar[i, 1:], (28, 28)))
-        img.save(join(dstPath, str(ar[i, 0]), str(i) + ".png"))
-    
-
-if __name__ == "__main__":
-    srcPath = r"dataset/mnist_test.csv"
-    dstPath = r"dataset/test"
-    extract(srcPath, dstPath)
+def extract_train():
+    train1 = pd.read_csv(conf["train1Path"], engine="c", header=None)
+    train2 = pd.read_csv(conf["train2Path"], engine="c", header=None)
+    train = pd.concat([train1, train2]).to_numpy()
+    X_train = train[:, 1:]
+    y_train = train[:, 1]
+    X_train = np.reshape(X_train, (-1, 28, 28))
+    return (X_train, y_train)
