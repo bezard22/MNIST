@@ -16,19 +16,11 @@ def reTrain(save=False, kerasData=False) -> None:
 
     :param save: whether to save the model after training, defaults to False
     :type save: bool, optional
-    :param kerasData: whether to use the keras built in data, defaults to False
-    :type kerasData: bool, optional
     """    
-    if kerasData:
-        (X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()
-        X_train, y_train = preProcess(X_train, y_train)
-        X_test, y_test = preProcess(X_test, y_test)
-    else:
-        X_test, y_test = extract_test()
-        X_train, y_train = extract_train()
-        X_test, y_test = preProcess(X_test, y_test)
-        X_train, y_train = preProcess(X_train, y_train)
-
+    X_test, y_test = extract_test()
+    X_train, y_train = extract_train()
+    X_test, y_test = preProcess(X_test, y_test)
+    X_train, y_train = preProcess(X_train, y_train)
 
     model.fit(X_train, y_train, batch_size=conf["batchSize"], epochs=conf["epochs"], validation_split=0.1)
 
