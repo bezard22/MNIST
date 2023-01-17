@@ -11,7 +11,7 @@ from extract import extract_test, extract_train
 #     reTrain  -  retrain the model
 # ------------------------------------------------------------------------
 
-def reTrain(save=False, kerasData=False) -> None:
+def reTrain(save=False) -> None:
     """retrain the model.
 
     :param save: whether to save the model after training, defaults to False
